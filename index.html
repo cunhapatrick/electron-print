@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Print ticket</title>
+    <link rel="stylesheet" type="text/css" href="print.css" midia="print"/>
+    <!-- <link rel="stylesheet" type="text/css" href="print.css"/> -->
+  </head>
+ <body>
+  <div class='print'>
+    <p id='header'></p>
+    <p id='data'></p>
+    <p id='footer'></p>
+  </div>
+  <script>
+    const ipcRenderer = require('electron').ipcRenderer
+    ipcRenderer.on('info',(event,data) => {
+      document.getElementById('header').innerHTML = data.header
+      document.getElementById('data').innerHTML = data.data
+      document.getElementById('footer').innerHTML = data.footer
+      ipcRenderer.send('finish','success')
+    })
+</script>
+</body>
+</html>
